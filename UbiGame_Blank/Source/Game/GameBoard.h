@@ -2,6 +2,7 @@
 #include "GameEngine/EntitySystem/Entity.h"
 #include "Game/GameEntities/Player.h"
 #include "Game/GameEntities/Bullet.h"
+#include "Game/GameEntities/Text.h"
 
 #include <SFML/System/Vector2.hpp>
 #include <vector>
@@ -32,7 +33,7 @@ namespace Game
     void updateRoundState();
 
     private:
-	    std::vector<GameEngine::Entity*> guiEntities;
+	    std::vector<Game::Text*> guiEntities;
 	    Game::Player *player1;
       Game::Player *player2;
       Game::Bullet *bullet;

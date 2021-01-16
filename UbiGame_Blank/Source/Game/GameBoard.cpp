@@ -33,8 +33,8 @@ void GameBoard::Update()
   if(gameStarted)
   {
     updateRoundState();
+    updateGUI();
   }
-  updateGUI();
 }
 
 void GameBoard::updateRoundState()
@@ -115,7 +115,7 @@ void GameBoard::buildGameGUI()
 
 void GameBoard::clearGUIEntities()
 {
-  for(std::vector<GameEngine::Entity*>::iterator it = guiEntities.begin(); it != guiEntities.end();)
+  for(std::vector<Game::Text*>::iterator it = guiEntities.begin(); it != guiEntities.end();)
   {
     GameEngine::GameEngineMain::GetInstance()->RemoveEntity(*it);
     it = guiEntities.erase(it);
