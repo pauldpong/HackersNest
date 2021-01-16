@@ -17,9 +17,6 @@ GameBoard::GameBoard() : player1(nullptr), player2(nullptr), bullet(nullptr)
     player2 = new Game::Player();
     player2->setControls(player2Controls);
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player2);
-
-    bullet = new Game::Bullet();
-    GameEngine::GameEngineMain::GetInstance()->AddEntity(bullet);
 }
 
 

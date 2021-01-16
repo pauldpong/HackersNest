@@ -8,6 +8,7 @@ void Game::PlayerActionComponent::Update()
 
 	if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(sf::Keyboard::Space))) {
 		bullet = new Game::Bullet();
+		bullet->SetPos(GetEntity()->GetPos());
 		GameEngine::GameEngineMain::GetInstance()->AddEntity(bullet);
 		
 	}
