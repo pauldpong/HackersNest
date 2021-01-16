@@ -163,6 +163,7 @@ XCOPY "$(SolutionDir)..\SFML-2.5.0\bin" "$(TargetDir)" /S /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Game\GameComponents\PlayerActionComponent.cpp" />
     <ClCompile Include="Source\Game\GameComponents\ProjectileMovementComponent.cpp" />
     <ClCompile Include="Source\Game\GameComponents\PlayerMovementComponent.cpp" />
     <ClCompile Include="Source\Game\GameEntities\Bullet.cpp" />
@@ -189,6 +190,7 @@ XCOPY "$(SolutionDir)..\SFML-2.5.0\bin" "$(TargetDir)" /S /Y /I</Command>
     <ClCompile Include="Source\GameEngine\EntitySystem\Components\SpriteRenderComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Game\GameComponents\PlayerActionComponent.h" />
     <ClInclude Include="Source\Game\GameComponents\ProjectileMovementComponent.h" />
     <ClInclude Include="Source\Game\GameComponents\PlayerMovementComponent.h" />
     <ClInclude Include="Source\Game\GameEntities\Bullet.h" />
