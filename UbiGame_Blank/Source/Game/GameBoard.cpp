@@ -1,25 +1,16 @@
 #include "GameBoard.h"
-
 #include "GameEngine/GameEngineMain.h"
 #include "Game/GameComponents/PlayerMovementComponent.h"
 #include "Game/GameEntities/Text.h"
 
+#include <string>
+#include <math.h>
+
 using namespace Game;
 
 GameBoard::GameBoard() : player1(nullptr), player2(nullptr), bullet(nullptr)
-
 {
-    int player1Controls[4] = { sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W, sf::Keyboard::S };
-    int player2Controls[4] = { sf::Keyboard::Left, sf::Keyboard::Right, sf::Keyboard::Up, sf::Keyboard::Down };
-
-    player1 = new Game::Player();
-    player1->setControls(player1Controls);
-    GameEngine::GameEngineMain::GetInstance()->AddEntity(player1);
-
-    player2 = new Game::Player();
-    player2->setControls(player2Controls);
-    GameEngine::GameEngineMain::GetInstance()->AddEntity(player2);
-    
+    buildMenuGUI();
 }
 
 
@@ -29,30 +20,69 @@ GameBoard::~GameBoard()
 }
 
 void GameBoard::Update()
-{	
+{
   //Listen for SPACE to change gameStarted
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !gameStarted){
     gameStarted = true;
+    buildGame();
+    clearGUIEntities();
+    buildGameGUI();
+    return;
   }
 
+  if(gameStarted)
+  {
+    updateRoundState();
+  }
   updateGUI();
+}
 
+void GameBoard::updateRoundState()
+{
+  if(roundStartCountdown > 0){
+    roundStartCountdown -= GameEngine::GameEngineMain::GetTimeDelta();
+    return;
+  }
+
+  if(currentRoundTimer > 0){
+    currentRoundTimer -= GameEngine::GameEngineMain::GetTimeDelta();
+  } else {
+    currentRoundTimer = 20;
+    currentRound++;
+    roundStartCountdown = 3;
+  }
+}
+
+void GameBoard::buildGame()
+{
+  //Initalize game states
+  currentRound = 1;
+  currentRoundTimer = 20;
+  roundStartCountdown = 3;
+  player1NumWins = 0;
+  player2NumWins = 0;
+  player1Health = 100;
+  player2Health = 100;
+
+  int player1Controls[4] = { sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W, sf::Keyboard::S };
+  int player2Controls[4] = { sf::Keyboard::Left, sf::Keyboard::Right, sf::Keyboard::Up, sf::Keyboard::Down };
+
+  player1 = new Game::Player();
+  player1->setControls(player1Controls);
+  GameEngine::GameEngineMain::GetInstance()->AddEntity(player1);
+
+  player2 = new Game::Player();
+  player2->setControls(player2Controls);
+  GameEngine::GameEngineMain::GetInstance()->AddEntity(player2);
 }
 
 void GameBoard::updateGUI()
 {
-  if(!gameStarted){
-    buildMenuGUI();
-  } else{
-    buildGameGUI();
-  }
 }
 
 
 void GameBoard::buildMenuGUI()
 {
-  clearGUIEntities();
-
   const std::string gameName = "BulletTime";
   const std::string startGameText = "Press Space to start!";
 
@@ -67,27 +97,30 @@ void GameBoard::buildMenuGUI()
 
 void GameBoard::buildGameGUI() 
 {
-  clearGUIEntities();
+  Text* player1HealthGUI = new Text("P1: " + std::to_string(player1Health), sf::Color::White, 30, sf::Vector2f(0.0f + 3 * 30, 30.0f));
+  GameEngine::GameEngineMain::GetInstance()->AddEntity(player1HealthGUI);
+  Text* player2HealthGUI = new Text("P2: " + std::to_string(player2Health), sf::Color::White, 30, sf::Vector2f(1024.0f - 3 * 30, 30.0f));
+  GameEngine::GameEngineMain::GetInstance()->AddEntity(player2HealthGUI);
 
-  Text* player1Health = new Text("P1: 50", sf::Color::White, 30, sf::Vector2f(0.0f + 3 * 30, 30.0f));
-  GameEngine::GameEngineMain::GetInstance()->AddEntity(player1Health);
-  Text* player2Health = new Text("P2: 50", sf::Color::White, 30, sf::Vector2f(1024.0f - 3 * 30, 30.0f));
-  GameEngine::GameEngineMain::GetInstance()->AddEntity(player2Health);
-
-  Text* roundTimer = new Text("15", sf::Color::White, 50, sf::Vector2f(1024.0f/2, 50.0f));
+  Text* roundTimer = new Text(std::to_string((int)ceil(currentRoundTimer)), sf::Color::White, 50, sf::Vector2f(1024.0f/2, 150.0f));
   GameEngine::GameEngineMain::GetInstance()->AddEntity(roundTimer);
+  Text* currentRoundGUI = new Text("Round " + std::to_string(currentRound), sf::Color::White, 50, sf::Vector2f(1024.0f/2, 50.0f));
+  GameEngine::GameEngineMain::GetInstance()->AddEntity(currentRoundGUI);
 
-  guiEntities.push_back(player1Health);
-  guiEntities.push_back(player2Health);
+  guiEntities.push_back(player1HealthGUI);
+  guiEntities.push_back(player2HealthGUI);
   guiEntities.push_back(roundTimer);
+  guiEntities.push_back(currentRoundGUI);
 }
 
 void GameBoard::clearGUIEntities()
 {
-  for(std::vector<GameEngine::Entity*>::iterator it = guiEntities.begin(); it != guiEntities.end();){
+  for(std::vector<GameEngine::Entity*>::iterator it = guiEntities.begin(); it != guiEntities.end();)
+  {
     GameEngine::GameEngineMain::GetInstance()->RemoveEntity(*it);
     it = guiEntities.erase(it);
   }
+  
 }
 
 void GameBoard::setGameStarted(bool newState) {

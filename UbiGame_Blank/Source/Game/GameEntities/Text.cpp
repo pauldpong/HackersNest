@@ -14,7 +14,6 @@ Text::Text(std::string text, sf::Color color, int fontSize, sf::Vector2f positio
 
 Text::~Text() 
 {
-
 }
 
 void Text::setText(std::string text)
