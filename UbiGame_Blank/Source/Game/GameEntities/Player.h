@@ -24,6 +24,7 @@ namespace Game
 		void disableInput(bool disable);
 
 		void addBullet(Game::Bullet* bullet);
+		void removeBullet(Game::Bullet* bullet);
 		void clearBullets();
 
 		void resetReplay();

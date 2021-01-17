@@ -4,6 +4,8 @@
 #include <GameEngine/EntitySystem/Components/CollidablePhysicsComponent.h>
 #include <GameEngine/GameEngineMain.h>
 
+#include <algorithm>
+
 Game::Player::Player() : playerHealth(100)
 {
 	setEntityType(GameEngine::EntityType::PLAYER);
@@ -39,6 +41,16 @@ void Game::Player::disableInput(bool disable)
 void Game::Player::addBullet(Game::Bullet* bullet)
 {
 	bullets.push_back(bullet);
+}
+
+void Game::Player::removeBullet(Game::Bullet* bullet)
+{
+	auto it = std::find(bullets.begin(), bullets.end(), bullet);
+
+	if (it != bullets.end())
+	{
+		bullets.erase(it);
+	}
 }
 
 void Game::Player::clearBullets()

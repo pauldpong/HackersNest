@@ -149,6 +149,7 @@ void GameBoard::buildGame()
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player1);
 
     player2 = new Game::Player();
+    player2->SetRotation(180);
     player2->setControls(player2Controls);
     player2->setActionButton(sf::Keyboard::Enter);
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player2);

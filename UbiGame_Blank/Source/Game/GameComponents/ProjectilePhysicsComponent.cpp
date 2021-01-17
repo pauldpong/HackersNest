@@ -48,6 +48,11 @@ void ProjectilePhysicsComponent::updateProjectileHit()
 		if (collidedEntity->getEntityType() == GameEngine::EntityType::PLAYER) 
 		{
 			Game::Player* hitPlayer = static_cast<Game::Player*>(collidedEntity);
+			Game::Bullet* bullet = static_cast<Game::Bullet*>(GetEntity());
+
+			Game::Player* bulletOwner = static_cast<Game::Player*>(bullet->getOwner());
+			bulletOwner->removeBullet(bullet);
+
 			hitPlayer->setPlayerHealth(hitPlayer->getPlayerHealth() - 20);
 		}
 	}
