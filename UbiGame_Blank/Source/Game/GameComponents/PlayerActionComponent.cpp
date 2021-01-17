@@ -22,9 +22,9 @@ void Game::PlayerActionComponent::Update()
 
 	if (inputDisabled) return;
 
-	if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(playerActionKey))) {
+	if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(playerActionKey))) 
+	{
 		firePressed = true;
-		
 	}
 	else
 	{

@@ -58,6 +58,9 @@ namespace Game
         std::vector<std::pair<sf::Vector2f, float>> replay1;
         std::vector<std::pair<sf::Vector2f, float>> replay2;
 
+        std::vector<bool> shotReplay1;
+        std::vector<bool> shotReplay2;
+
         bool gameStarted = false;
         bool roundEnded = false;
         bool gameOver = false;

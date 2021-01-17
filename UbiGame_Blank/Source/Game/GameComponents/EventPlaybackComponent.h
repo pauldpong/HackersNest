@@ -23,6 +23,8 @@ namespace Game
 		std::vector<std::pair<sf::Vector2f, float>> replay;
 		std::vector<bool> shotReplay;
 
+		bool firePressed = false;
+		bool shotshot = false;
 		float samplingTime;
 		int currentReplayIndex = 0;
 		float time = 0.f;

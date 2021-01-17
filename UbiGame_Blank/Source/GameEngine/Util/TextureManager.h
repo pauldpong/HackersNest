@@ -26,7 +26,7 @@ namespace GameEngine
 		switch(texture)
     {
       case eTexture::Player1: return "PlayerOne.png";
-      case eTexture::Player2: return "PlayerOne.png";
+      case eTexture::Player2: return "PlayerTwo.png";
       case eTexture::Background: return "Background.png";
       case eTexture::Box:return "Box.png";
 	  case eTexture::Bullet: return "Bullet.png";

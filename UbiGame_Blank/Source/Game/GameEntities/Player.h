@@ -10,7 +10,7 @@ namespace Game
 	class Player : public GameEngine::Entity
 	{
 	public:
-		Player();
+		Player(GameEngine::eTexture::type texture);
 		virtual void OnAddToWorld();
 		virtual void OnRemoveFromWorld();
 
@@ -35,10 +35,16 @@ namespace Game
 		std::vector<std::pair<sf::Vector2f, float>>& getReplay() { return recordingComponent->getReplay(); };
 		std::vector<bool>& getShotReplay() { return recordingComponent->getShotReplay(); }
 
+		GameEngine::eTexture::type getTexture()
+		{
+			return texture;
+		};
+
 	private:
 		int playerHealth;
 
 		std::vector<Game::Bullet*> bullets;
+		GameEngine::eTexture::type texture;
 
 		// Components 
 		Game::PlayerMovementComponent* movementComponent;

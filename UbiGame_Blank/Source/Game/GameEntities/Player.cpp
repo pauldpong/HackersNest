@@ -6,14 +6,14 @@
 
 #include <algorithm>
 
-Game::Player::Player() : playerHealth(100)
+Game::Player::Player(GameEngine::eTexture::type texture) : playerHealth(100), texture(texture)
 {
 	setEntityType(GameEngine::EntityType::PLAYER);
 	SetSize(sf::Vector2f(50.0f, 50.0f));
 
-  //Render Sprite
+	//Render Sprite
 	renderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
-	renderComponent -> SetTexture(GameEngine::eTexture::Player1);
+	renderComponent -> SetTexture(texture);
 	renderComponent -> SetFillColor(sf::Color::Transparent);
 
 	AddComponent<GameEngine::CollidablePhysicsComponent>();

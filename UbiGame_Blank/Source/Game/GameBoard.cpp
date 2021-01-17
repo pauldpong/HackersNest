@@ -53,7 +53,8 @@ void GameBoard::Update()
 
     if (gameOver) 
     {
-        while (true);
+        countDownTimer->setText("GAME OVER!");
+        gameStarted = false;
     }
 }
 
@@ -103,16 +104,19 @@ void Game::GameBoard::buildRound(int currentRound)
     case 1:
         break;
     case 2:
-        clone1_1 = new Game::Clone(player1, player1->getReplay());
+        clone1_1 = new Game::Clone(player1, player1->getReplay(), player1->getShotReplay());
         clone1_1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_1);
         
-        clone2_1 = new Game::Clone(player2, player2->getReplay());
+        clone2_1 = new Game::Clone(player2, player2->getReplay(), player2->getShotReplay());
         clone2_1->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_1);
 
         replay1 = player1->getReplay();
         replay2 = player2->getReplay();
+
+        shotReplay1 = player1->getShotReplay();
+        shotReplay2 = player2->getShotReplay();
 
         player1->restartRecording();
         player2->restartRecording();
@@ -122,19 +126,19 @@ void Game::GameBoard::buildRound(int currentRound)
         GameEngine::GameEngineMain::GetInstance()->RemoveEntity(clone1_1);
         GameEngine::GameEngineMain::GetInstance()->RemoveEntity(clone2_1);
 
-        clone1_1 = new Game::Clone(player1, replay1);
+        clone1_1 = new Game::Clone(player1, replay1, shotReplay1);
         clone1_1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_1);
         
-        clone2_1 = new Game::Clone(player2, replay2);
+        clone2_1 = new Game::Clone(player2, replay2, shotReplay2);
         clone2_1->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_1);
 
-        clone1_2 = new Game::Clone(player1, player1->getReplay());
+        clone1_2 = new Game::Clone(player1, player1->getReplay(), player1->getShotReplay());
         clone1_2->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_2);
         
-        clone2_2 = new Game::Clone(player2, player2->getReplay());
+        clone2_2 = new Game::Clone(player2, player2->getReplay(), player2->getShotReplay());
         clone2_2->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_2);      
 
@@ -176,12 +180,12 @@ void GameBoard::buildGame()
     int player1Controls[6] = { sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::Q, sf::Keyboard::E };
     int player2Controls[6] = { sf::Keyboard::Numpad1, sf::Keyboard::Numpad3, sf::Keyboard::Numpad5, sf::Keyboard::Numpad2, sf::Keyboard::Numpad4, sf::Keyboard::Numpad6 };
 
-    player1 = new Game::Player();
+    player1 = new Game::Player(GameEngine::eTexture::Player1);
     player1->setControls(player1Controls);
     player1->setActionButton(sf::Keyboard::Space);
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player1);
 
-    player2 = new Game::Player();
+    player2 = new Game::Player(GameEngine::eTexture::Player2);
     player2->SetRotation(180);
     player2->setControls(player2Controls);
     player2->setActionButton(sf::Keyboard::Enter);

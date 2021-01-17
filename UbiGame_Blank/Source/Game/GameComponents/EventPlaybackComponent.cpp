@@ -49,11 +49,23 @@ void EventPlaybackComponent::Update()
 
     // PLAYER ACTION
     bool didPlayerShoot = shotReplay[currentReplayIndex];
-    if (didPlayerShoot && time >= samplingTime)
+
+    if (didPlayerShoot)
+    {
+        firePressed = true;
+    }
+    else 
+    {
+        shotshot = false;
+    }
+
+    if (firePressed && !shotshot)
     {
         shootBullet();
-        std::cout << "shoot" << std::endl;
+        shotshot = true;
     }
+
+    firePressed = false;
 }
 
 void EventPlaybackComponent::OnAddToWorld()
