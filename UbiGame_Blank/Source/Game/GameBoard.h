@@ -3,7 +3,9 @@
 #include "Game/GameEntities/Player.h"
 #include "Game/GameEntities/Bullet.h"
 #include "Game/GameEntities/Text.h"
+#include "Game/GameEntities/Wall.h"
 #include "Game/GameEntities/Clone.h"
+
 
 #include <SFML/System/Vector2.hpp>
 #include <vector>
@@ -30,6 +32,7 @@ namespace Game
         void resetPlayers();
 
         void buildGame();
+        void buildMap();
         void buildRound(int currentRound);
         void updateRoundState();
         void drawBackground();
@@ -44,6 +47,7 @@ namespace Game
         Game::Text* countDownTimer, * roundTimer, * currentRoundGUI;
         Game::Text* titleText, * startText, * htnText;
         GameEngine::Entity* htnLogo;
+        std::vector<Game::Wall*> mapBoxes;
 
 	    Game::Player *player1;
         Game::Player *player2;
