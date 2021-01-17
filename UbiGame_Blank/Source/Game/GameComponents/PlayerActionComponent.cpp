@@ -60,14 +60,14 @@ void PlayerActionComponent::spawnBullet()
 		Game::Bullet* bullet = new Game::Bullet();
 
 		player->addBullet(bullet);
-		bullet->setOwner(player);
-		bullet->SetPos(player->GetPos());
-		
+		bullet->setOwner(player); 
+	
 		float rotation = GetEntity()->GetRot();
 		sf::Vector2f playerFacingUnitVector = sf::Vector2f(cos(rotation / 180 * M_PI), sin(rotation / 180 * M_PI));
+
+		bullet->SetPos(player->GetPos() + sf::Vector2f(playerFacingUnitVector.x * player->GetSize().x, playerFacingUnitVector.y * player->GetSize().y));
+
 		bullet->setDirectionVector(playerFacingUnitVector);
 		GameEngine::GameEngineMain::GetInstance()->AddEntity(bullet);
 	}
-	
-	
 }

@@ -14,7 +14,7 @@ void PlayerMovementComponent::setPlayerControls(int playerControls[6])
     controls[5] = playerControls[5];
 }
 
-void Game::PlayerMovementComponent::disableInput(bool disable)
+void PlayerMovementComponent::disableInput(bool disable)
 {
     inputDisabled = disable;
 }

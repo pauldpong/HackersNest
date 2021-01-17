@@ -3,6 +3,7 @@
 #include "GameEngine/EntitySystem/Components/SpriteRenderComponent.h"
 #include <Game/GameComponents/PlayerMovementComponent.h>
 #include <Game/GameComponents/PlayerActionComponent.h>
+#include <Game/GameComponents/EventRecordingComponent.h>
 
 namespace Game 
 {
@@ -24,7 +25,15 @@ namespace Game
 		void disableInput(bool disable);
 
 		void addBullet(Game::Bullet* bullet);
+		void removeBullet(Game::Bullet* bullet);
 		void clearBullets();
+
+		bool getFirePressed() const { return actionComponent->getFirePressed(); }
+
+		float getSamplingTime() const { return recordingComponent->getSamplingTime(); }
+		void restartRecording();
+		std::vector<std::pair<sf::Vector2f, float>>& getReplay() { return recordingComponent->getReplay(); };
+		std::vector<bool>& getShotReplay() { return recordingComponent->getShotReplay(); }
 
 	private:
 		int playerHealth;
@@ -34,6 +43,7 @@ namespace Game
 		// Components 
 		Game::PlayerMovementComponent* movementComponent;
 		Game::PlayerActionComponent* actionComponent;
-    GameEngine::SpriteRenderComponent* renderComponent;
+		Game::EventRecordingComponent* recordingComponent;
+		GameEngine::SpriteRenderComponent* renderComponent;
 	};
 }

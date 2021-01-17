@@ -4,6 +4,8 @@
 #include <GameEngine/EntitySystem/Components/CollidablePhysicsComponent.h>
 #include <GameEngine/GameEngineMain.h>
 
+#include <algorithm>
+
 Game::Player::Player() : playerHealth(100)
 {
 	setEntityType(GameEngine::EntityType::PLAYER);
@@ -11,12 +13,15 @@ Game::Player::Player() : playerHealth(100)
 
   //Render Sprite
 	renderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
-  renderComponent -> SetTexture(GameEngine::eTexture::Player1);
-  renderComponent -> SetFillColor(sf::Color::Transparent);
+	renderComponent -> SetTexture(GameEngine::eTexture::Player1);
+	renderComponent -> SetFillColor(sf::Color::Transparent);
 
 	AddComponent<GameEngine::CollidablePhysicsComponent>();
 	actionComponent = AddComponent<Game::PlayerActionComponent>();
 	movementComponent = AddComponent<Game::PlayerMovementComponent>();
+
+	recordingComponent = AddComponent<Game::EventRecordingComponent>();
+	recordingComponent->setSamplingTime(1.f / 60.f);
 }
 
 void Game::Player::setControls(int controls[4]) 
@@ -40,6 +45,16 @@ void Game::Player::addBullet(Game::Bullet* bullet)
 	bullets.push_back(bullet);
 }
 
+void Game::Player::removeBullet(Game::Bullet* bullet)
+{
+	auto it = std::find(bullets.begin(), bullets.end(), bullet);
+
+	if (it != bullets.end())
+	{
+		bullets.erase(it);
+	}
+}
+
 void Game::Player::clearBullets()
 {
 	for (auto it = bullets.begin(); it != bullets.end(); it++)
@@ -48,6 +63,11 @@ void Game::Player::clearBullets()
 	}
 
 	bullets.clear();
+}
+
+void Game::Player::restartRecording()
+{
+	recordingComponent->restartRecording();
 }
 
 void Game::Player::OnAddToWorld() 

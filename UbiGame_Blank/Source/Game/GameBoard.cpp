@@ -8,6 +8,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h> 
+#include <iostream>
+
 
 using namespace Game;
 
@@ -92,6 +94,54 @@ void Game::GameBoard::buildRound(int currentRound)
     roundEnded = false;
 
     resetPlayers();
+
+    float screenHeight = 720.f;
+    float screenWidth = 1280.f;
+
+    switch (currentRound) 
+    {
+    case 1:
+        break;
+    case 2:
+        clone1_1 = new Game::Clone(player1, player1->getReplay());
+        clone1_1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_1);
+        
+        clone2_1 = new Game::Clone(player2, player2->getReplay());
+        clone2_1->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_1);
+
+        replay1 = player1->getReplay();
+        replay2 = player2->getReplay();
+
+        player1->restartRecording();
+        player2->restartRecording();
+
+        break;
+    case 3:
+        GameEngine::GameEngineMain::GetInstance()->RemoveEntity(clone1_1);
+        GameEngine::GameEngineMain::GetInstance()->RemoveEntity(clone2_1);
+
+        clone1_1 = new Game::Clone(player1, replay1);
+        clone1_1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_1);
+        
+        clone2_1 = new Game::Clone(player2, replay2);
+        clone2_1->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_1);
+
+        clone1_2 = new Game::Clone(player1, player1->getReplay());
+        clone1_2->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_2);
+        
+        clone2_2 = new Game::Clone(player2, player2->getReplay());
+        clone2_2->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_2);      
+
+        break;
+    default:
+        break;
+    }
 }
 
 void Game::GameBoard::resetPlayers()
@@ -132,6 +182,7 @@ void GameBoard::buildGame()
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player1);
 
     player2 = new Game::Player();
+    player2->SetRotation(180);
     player2->setControls(player2Controls);
     player2->setActionButton(sf::Keyboard::Enter);
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player2);
