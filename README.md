@@ -1,4 +1,6 @@
-## BulletTime: the 1v1 Shooter Arena where your past actions matter.
+## BulletTime: the 1v1 Shooter Arena where your past actions matter. - Hack the North 2020++
+Paul Damrongpiriyapong, Peter Damrongpiriyapong, William Chan, Jackie Liu
+
 ## Themes and Mechanics
  - 1v1
  - Local Multiplayer
