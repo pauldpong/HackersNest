@@ -13,8 +13,8 @@ Game::Player::Player() : playerHealth(100)
 
   //Render Sprite
 	renderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
-  renderComponent -> SetTexture(GameEngine::eTexture::Player1);
-  renderComponent -> SetFillColor(sf::Color::Transparent);
+	renderComponent -> SetTexture(GameEngine::eTexture::Player1);
+	renderComponent -> SetFillColor(sf::Color::Transparent);
 
 	AddComponent<GameEngine::CollidablePhysicsComponent>();
 	actionComponent = AddComponent<Game::PlayerActionComponent>();

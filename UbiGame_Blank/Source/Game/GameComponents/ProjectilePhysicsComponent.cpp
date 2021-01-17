@@ -4,7 +4,7 @@
 
 using namespace Game;
 
-ProjectilePhysicsComponent::ProjectilePhysicsComponent() : velocity(sf::Vector2f(0.f, 0.f))
+ProjectilePhysicsComponent::ProjectilePhysicsComponent()
 {
 
 }
@@ -48,6 +48,17 @@ void ProjectilePhysicsComponent::updateProjectileHit()
 		if (collidedEntity->getEntityType() == GameEngine::EntityType::PLAYER) 
 		{
 			Game::Player* hitPlayer = static_cast<Game::Player*>(collidedEntity);
+			Game::Bullet* bullet = static_cast<Game::Bullet*>(GetEntity());
+
+			Game::Player* bulletOwner = static_cast<Game::Player*>(bullet->getOwner());
+			bulletOwner->removeBullet(bullet);
+
+			hitPlayer->setPlayerHealth(hitPlayer->getPlayerHealth() - 20);
+		}
+		else if (collidedEntity->getEntityType() == GameEngine::EntityType::CLONE)
+		{
+			Game::Clone* clone = static_cast<Game::Clone*>(collidedEntity);
+			Game::Player* hitPlayer = clone->getParent();
 			Game::Bullet* bullet = static_cast<Game::Bullet*>(GetEntity());
 
 			Game::Player* bulletOwner = static_cast<Game::Player*>(bullet->getOwner());
