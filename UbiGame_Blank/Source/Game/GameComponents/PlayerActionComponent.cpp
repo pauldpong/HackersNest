@@ -5,6 +5,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+#include <SFML/Audio.hpp>
+
 using namespace Game;
 
 Game::PlayerActionComponent::PlayerActionComponent() : firePressed(false)
@@ -16,6 +18,16 @@ Game::PlayerActionComponent::~PlayerActionComponent()
 {
 }
 
+void playPew()
+{
+	sf::SoundBuffer buffer;
+	if (!buffer.loadFromFile("../../resources/snd/pew.wav"))
+		return;
+
+	sf::Sound sound(buffer);
+	sound.play();
+}
+
 void Game::PlayerActionComponent::Update()
 {
 	Component::Update();
@@ -24,7 +36,7 @@ void Game::PlayerActionComponent::Update()
 
 	if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(playerActionKey))) {
 		firePressed = true;
-		
+
 	}
 	else
 	{
@@ -36,12 +48,12 @@ void Game::PlayerActionComponent::Update()
 	}
 }
 
-void Game::PlayerActionComponent::OnAddToWorld() 
+void Game::PlayerActionComponent::OnAddToWorld()
 {
-	
+
 }
 
-void Game::PlayerActionComponent::setPlayerAction(int action) 
+void Game::PlayerActionComponent::setPlayerAction(int action)
 {
 	this->playerActionKey = action;
 }
@@ -51,17 +63,18 @@ void Game::PlayerActionComponent::disableInput(bool disable)
 	inputDisabled = disable;
 }
 
-void PlayerActionComponent::spawnBullet() 
+void PlayerActionComponent::spawnBullet()
 {
 	GameEngine::Entity* entity = GetEntity();
-	if (entity->getEntityType() == GameEngine::EntityType::PLAYER) 
+	if (entity->getEntityType() == GameEngine::EntityType::PLAYER)
 	{
+		playPew();
 		Game::Player* player = static_cast<Game::Player*>(GetEntity());
 		Game::Bullet* bullet = new Game::Bullet();
 
 		player->addBullet(bullet);
-		bullet->setOwner(player); 
-	
+		bullet->setOwner(player);
+
 		float rotation = GetEntity()->GetRot();
 		sf::Vector2f playerFacingUnitVector = sf::Vector2f(cos(rotation / 180 * M_PI), sin(rotation / 180 * M_PI));
 
@@ -70,6 +83,6 @@ void PlayerActionComponent::spawnBullet()
 		bullet->setDirectionVector(playerFacingUnitVector);
 		GameEngine::GameEngineMain::GetInstance()->AddEntity(bullet);
 	}
-	
-	
+
+
 }

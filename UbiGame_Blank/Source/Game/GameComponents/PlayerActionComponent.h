@@ -11,6 +11,8 @@ namespace Game
 		PlayerActionComponent();
 		~PlayerActionComponent();
 
+		void playPew();
+
 		virtual void Update();
 		virtual void OnAddToWorld();
 
