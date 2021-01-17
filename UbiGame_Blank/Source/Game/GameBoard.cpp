@@ -95,15 +95,13 @@ void Game::GameBoard::buildRound(int currentRound)
     float screenHeight = 720.f;
     float screenWidth = 1280.f;
 
-    float index = 1;
-
     switch (currentRound) 
     {
     case 1:
         break;
     case 2:
         clone1_1 = new Game::Clone(player1, player1->getReplayVector());
-        clone1_1->SetPos(sf::Vector2f(50.f + index * 10.f, screenHeight / 2.f));
+        clone1_1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_1);
         
         clone2_1 = new Game::Clone(player2, player2->getReplayVector());
@@ -122,7 +120,7 @@ void Game::GameBoard::buildRound(int currentRound)
         GameEngine::GameEngineMain::GetInstance()->RemoveEntity(clone2_1);
 
         clone1_1 = new Game::Clone(player1, replay1);
-        clone1_1->SetPos(sf::Vector2f(50.f + index * 10.f, screenHeight / 2.f));
+        clone1_1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_1);
         
         clone2_1 = new Game::Clone(player2, replay2);
@@ -130,7 +128,7 @@ void Game::GameBoard::buildRound(int currentRound)
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_1);
 
         clone1_2 = new Game::Clone(player1, player1->getReplayVector());
-        clone1_2->SetPos(sf::Vector2f(50.f + index * 10.f, screenHeight / 2.f));
+        clone1_2->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_2);
         
         clone2_2 = new Game::Clone(player2, player2->getReplayVector());
