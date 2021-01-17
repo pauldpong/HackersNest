@@ -38,7 +38,7 @@ void ProjectilePhysicsComponent::updateProjectileHit()
 		return;
 	}
 
-	if (colPhys->didCollide() && colPhys->getCollidedEntity() != nullptr && static_cast<Game::Bullet*>(GetEntity())->getOwner() != colPhys->getCollidedEntity())
+	if (colPhys->didCollide() && colPhys->getCollidedEntity() != nullptr)
 	{
 		//Remove self
 		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(GetEntity());
@@ -65,6 +65,13 @@ void ProjectilePhysicsComponent::updateProjectileHit()
 			bulletOwner->removeBullet(bullet);
 
 			hitPlayer->setPlayerHealth(hitPlayer->getPlayerHealth() - 20);
+		} 
+		else if (collidedEntity->getEntityType() == GameEngine::EntityType::WALL)
+		{
+			Game::Bullet* bullet = static_cast<Game::Bullet*>(GetEntity());
+
+			Game::Player* bulletOwner = static_cast<Game::Player*>(bullet->getOwner());
+			bulletOwner->removeBullet(bullet);
 		}
 	}
 }

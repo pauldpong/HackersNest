@@ -1,12 +1,16 @@
 #include "Bullet.h"
 #include "GameEngine/EntitySystem/Components/RenderComponent.h"
 #include <GameEngine/EntitySystem/Components/CollidablePhysicsComponent.h>
+#include <GameEngine/EntitySystem/Components/SpriteRenderComponent.h>
 #include <Game/GameComponents/ProjectilePhysicsComponent.h>
 
 Game::Bullet::Bullet()
 {
     setEntityType(GameEngine::EntityType::BULLET);
-    AddComponent<GameEngine::RenderComponent>();
+    renderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
+    renderComponent->SetTexture(GameEngine::eTexture::Bullet);
+    renderComponent->SetFillColor(sf::Color::Transparent);
+
     projectilePhysicsComponent = AddComponent<Game::ProjectilePhysicsComponent>();
 
     SetSize(sf::Vector2f(10.0f, 10.0f));

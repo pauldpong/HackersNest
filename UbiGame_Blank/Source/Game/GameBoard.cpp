@@ -286,7 +286,7 @@ void GameBoard::buildMap()
   for(int currBox = 0; currBox < maxBoxes; currBox++)
   {
     sf::Vector2f pos = sf::Vector2f((rand() % xGrid + 1) * 50.0f + 40, (rand() % yGrid + 1) * 50.0f + 40);
-    Wall* mapBox = new Wall(GameEngine::eTexture::Box, sf::Vector2(50.0f, 50.0f), pos);
+    Wall* mapBox = new Wall(GameEngine::eTexture::Box, sf::Vector2f(50.0f, 50.0f), pos);
     GameEngine::GameEngineMain::GetInstance()->AddEntity(mapBox);
     mapBoxes.push_back(mapBox);
   }

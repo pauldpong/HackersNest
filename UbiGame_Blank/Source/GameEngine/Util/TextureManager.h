@@ -15,6 +15,7 @@ namespace GameEngine
       Player2,
       Background,
       Box,
+	  Bullet,
       htn,
       Count,
 		};
@@ -28,6 +29,7 @@ namespace GameEngine
       case eTexture::Player2: return "PlayerOne.png";
       case eTexture::Background: return "Background.png";
       case eTexture::Box:return "Box.png";
+	  case eTexture::Bullet: return "Bullet.png";
       case eTexture::htn: return "htn.png";
     }
     return "UnknownTexType";

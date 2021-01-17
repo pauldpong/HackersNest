@@ -63,16 +63,12 @@ void CollidablePhysicsComponent::Update()
 					pos.y += intersection.height;
 			}
 
-			if (colComponent->GetEntity()->getEntityType() == EntityType::PLAYER)
+			if (colComponent->GetEntity()->getEntityType() == EntityType::PLAYER || colComponent->GetEntity()->getEntityType() == EntityType::WALL || colComponent->GetEntity()->getEntityType() == EntityType::CLONE)
 			{
 				m_didCollide = true;
 				collidedEntity = colComponent->GetEntity();
 				GetEntity()->SetPos(pos);
-			} else if (colComponent->GetEntity()->getEntityType() == EntityType::WALL){
-        m_didCollide = true;
-        collidedEntity = colComponent->GetEntity();
-        GetEntity()->SetPos(pos);
-      }
+			} 
 		}
 	}
 }

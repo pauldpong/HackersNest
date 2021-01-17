@@ -2,6 +2,7 @@
 
 #include "GameEngine/EntitySystem/Entity.h"
 #include <Game/GameComponents/ProjectilePhysicsComponent.h>
+#include <GameEngine/EntitySystem/Components/SpriteRenderComponent.h>
 
 
 namespace Game 
@@ -22,5 +23,6 @@ namespace Game
 	private:
 		GameEngine::Entity* owner;
 		Game::ProjectilePhysicsComponent* projectilePhysicsComponent;
+		GameEngine::SpriteRenderComponent* renderComponent;
 	};
 }
