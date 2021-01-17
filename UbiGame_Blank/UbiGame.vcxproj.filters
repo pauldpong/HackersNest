@@ -186,4 +186,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\Downloads\canary.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\snd\canary.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\snd\pew.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

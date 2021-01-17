@@ -11,13 +11,13 @@ namespace Game
 		PlayerActionComponent();
 		~PlayerActionComponent();
 
-		void playPew();
-
 		virtual void Update();
 		virtual void OnAddToWorld();
 
 		void setPlayerAction(int playerAction);
 		void disableInput(bool disable);
+		void playPew();
+
 	private:
 		int playerActionKey;
 		bool firePressed;

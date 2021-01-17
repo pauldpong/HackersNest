@@ -221,6 +221,11 @@ XCOPY "$(SolutionDir)..\SFML-2.5.0\bin" "$(TargetDir)" /S /Y /I</Command>
     <ClInclude Include="Source\Game\GameEntities\Text.h" />
     <ClInclude Include="Source\Game\GameEntities\Wall.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\Downloads\canary.wav" />
+    <Media Include="Resources\snd\canary.wav" />
+    <Media Include="Resources\snd\pew.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

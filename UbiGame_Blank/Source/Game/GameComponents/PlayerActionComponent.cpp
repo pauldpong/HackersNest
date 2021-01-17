@@ -6,6 +6,8 @@
 #include <math.h>
 
 #include <SFML/Audio.hpp>
+#include <iostream>
+
 
 using namespace Game;
 
@@ -18,15 +20,6 @@ Game::PlayerActionComponent::~PlayerActionComponent()
 {
 }
 
-void playPew()
-{
-	sf::SoundBuffer buffer;
-	if (!buffer.loadFromFile("../../resources/snd/pew.wav"))
-		return;
-
-	sf::Sound sound(buffer);
-	sound.play();
-}
 
 void Game::PlayerActionComponent::Update()
 {
@@ -61,6 +54,27 @@ void Game::PlayerActionComponent::setPlayerAction(int action)
 void Game::PlayerActionComponent::disableInput(bool disable)
 {
 	inputDisabled = disable;
+}
+
+void Game::PlayerActionComponent::playPew()
+{
+	sf::SoundBuffer buffer;
+	if (!buffer.loadFromFile("Resources/snd/pew.wav"))
+		return;
+
+	std::cout << "pew.wav:" << std::endl;
+	std::cout << " " << buffer.getDuration().asSeconds() << " seconds" << std::endl;
+	std::cout << " " << buffer.getSampleRate() << " samples / sec" << std::endl;
+	std::cout << " " << buffer.getChannelCount() << " channels" << std::endl;
+
+
+	sf::Sound sound(buffer);
+	sound.play();
+	while (sound.getStatus() == sf::Sound::Playing)
+	{
+		std::cout << "\rPlaying... " << sound.getPlayingOffset().asSeconds() << " sec        ";
+		std::cout << std::flush;
+	}
 }
 
 void PlayerActionComponent::spawnBullet()
