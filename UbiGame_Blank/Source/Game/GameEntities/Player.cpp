@@ -51,6 +51,11 @@ void Game::Player::clearBullets()
 	bullets.clear();
 }
 
+void Game::Player::resetReplay()
+{
+	movementComponent->resetReplayVector();
+}
+
 void Game::Player::OnAddToWorld() 
 {
 	Entity::OnAddToWorld();

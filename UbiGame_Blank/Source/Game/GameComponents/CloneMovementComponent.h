@@ -14,6 +14,7 @@ namespace Game
 
 		void setSamplingTime(float time) { samplingTime = time; }
 		void setReplay(std::vector<std::pair<sf::Vector2f, float>> replay);
+		void restartReplay() { currentReplayIndex = 0; }
 
 	private:
 		std::vector<std::pair<sf::Vector2f, float>> replay;

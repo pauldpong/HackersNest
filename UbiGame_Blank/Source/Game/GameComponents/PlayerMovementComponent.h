@@ -14,6 +14,7 @@ class PlayerMovementComponent : public GameEngine::Component
         void setPlayerControls(int playerControls[6]);
         void disableInput(bool disable);
 
+        void resetReplayVector();
         std::vector<std::pair<sf::Vector2f, float>> getReplayVector() const { return replay; }
 
         void setSamplingTime(float time) { samplingTime = time; }

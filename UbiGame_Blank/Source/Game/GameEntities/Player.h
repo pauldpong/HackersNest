@@ -26,6 +26,7 @@ namespace Game
 		void addBullet(Game::Bullet* bullet);
 		void clearBullets();
 
+		void resetReplay();
 		std::vector<std::pair<sf::Vector2f, float>> getReplayVector() const { return movementComponent->getReplayVector(); }
 		float getSamplingTime() const { return movementComponent->getSamplingTime(); }
 

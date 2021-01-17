@@ -91,25 +91,40 @@ void Game::GameBoard::buildRound(int currentRound)
     roundEnded = false;
 
     resetPlayers();
+
+    float screenHeight = 720.f;
+    float screenWidth = 1280.f;
+
+    float index = 1;
+
+    switch (currentRound) 
+    {
+    case 1:
+        break;
+    case 2:
+        clone1_1 = new Game::Clone(player1);
+        clone1_1->SetPos(sf::Vector2f(50.f + index * 10.f, screenHeight / 2.f));
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_1);
+        
+        clone2_1 = new Game::Clone(player2);
+        clone2_1->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_1);
+
+        break;
+    case 3:
+        GameEngine::GameEngineMain::GetInstance()->RemoveEntity(clone1_1);
+        GameEngine::GameEngineMain::GetInstance()->RemoveEntity(clone2_1);
+
+        break;
+    default:
+        break;
+    }
 }
 
 void Game::GameBoard::resetPlayers()
 {
     float screenHeight = 720.f;
     float screenWidth = 1280.f;
-
-    replay = player1->getReplayVector();
-    GameEngine::Entity* clone = new GameEngine::Entity();
-    clone->AddComponent<GameEngine::RenderComponent>();
-    clone->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
-    clone->SetSize(sf::Vector2f(50.f, 50.f));
-    Game::CloneMovementComponent* cloneMovementComponent = clone->AddComponent<Game::CloneMovementComponent>();
-    cloneMovementComponent->setSamplingTime(player1->getSamplingTime());
-    std::cout << player1->getSamplingTime() << std::endl;
-    std::cout << replay.size() << std::endl;
-
-    cloneMovementComponent->setReplay(replay);
-    GameEngine::GameEngineMain::GetInstance()->AddEntity(clone);
 
     player1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
     player2->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));

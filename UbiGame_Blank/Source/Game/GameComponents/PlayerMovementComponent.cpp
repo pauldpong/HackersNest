@@ -19,6 +19,11 @@ void PlayerMovementComponent::disableInput(bool disable)
     inputDisabled = disable;
 }
 
+void Game::PlayerMovementComponent::resetReplayVector()
+{
+    replay.clear();
+}
+
 void PlayerMovementComponent::Update()
 {
     Component::Update();

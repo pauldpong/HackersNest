@@ -3,6 +3,7 @@
 #include "Game/GameEntities/Player.h"
 #include "Game/GameEntities/Bullet.h"
 #include "Game/GameEntities/Text.h"
+#include "Game/GameEntities/Clone.h"
 
 #include <SFML/System/Vector2.hpp>
 #include <vector>
@@ -47,7 +48,11 @@ namespace Game
 	    Game::Player *player1;
         Game::Player *player2;
 
-        std::vector<std::pair<sf::Vector2f, float>> replay;
+        Game::Clone* clone1_1, * clone1_2;
+        Game::Clone* clone2_1, * clone2_2;
+
+        std::vector<std::pair<sf::Vector2f, float>> replay1;
+        std::vector<std::pair<sf::Vector2f, float>> replay2;
 
         bool gameStarted = false;
         bool roundEnded = false;
