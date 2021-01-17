@@ -31,6 +31,7 @@ namespace Game
         void buildGame();
         void buildRound(int currentRound);
         void updateRoundState();
+        void drawBackground();
 
         void checkPlayersHealthState();
 
@@ -40,9 +41,10 @@ namespace Game
 
         Game::Text* player1HealthGUI, * player2HealthGUI;
         Game::Text* countDownTimer, * roundTimer, * currentRoundGUI;
-        Game::Text* titleText, * startText;
+        Game::Text* titleText, * startText, * htnText;
+        GameEngine::Entity* htnLogo;
 
-	    Game::Player *player1;
+	      Game::Player *player1;
         Game::Player *player2;
 
         bool gameStarted = false;

@@ -173,6 +173,17 @@ void GameBoard::buildMenuGUI()
   GameEngine::GameEngineMain::GetInstance()->AddEntity(titleText);
   startText = new Text(startGameText, sf::Color::White, 30, sf::Vector2f(windowWidth/2, 700.0f));
   GameEngine::GameEngineMain::GetInstance()->AddEntity(startText);
+
+  
+  htnText = new Text("Hack the North 2020++", sf::Color::White, 20, sf::Vector2f(windowWidth/2, 700.0f));
+  GameEngine::GameEngineMain::GetInstance()->AddEntity(htnText);
+  htnLogo = new GameEngine::Entity;
+  GameEngine::GameEngineMain::GetInstance()->AddEntity(htnLogo);
+  htnLogo -> SetPos(sf::Vector2f(windowWidth/2 - 225.0f, 700.0f));
+  htnLogo -> SetSize(sf::Vector2f(30.0f, 30.0f));
+  GameEngine::SpriteRenderComponent* renderhtn = htnLogo -> AddComponent<GameEngine::SpriteRenderComponent>();
+  renderhtn -> SetTexture(GameEngine::eTexture::htn);
+  renderhtn -> SetFillColor(sf::Color::Transparent);
 }
 
 void GameBoard::buildGameGUI() 
@@ -196,6 +207,8 @@ void GameBoard::clearMenuGUIEntities()
 {
     GameEngine::GameEngineMain::GetInstance()->RemoveEntity(titleText);
     GameEngine::GameEngineMain::GetInstance()->RemoveEntity(startText);
+    GameEngine::GameEngineMain::GetInstance()->RemoveEntity(htnText);
+    GameEngine::GameEngineMain::GetInstance()->RemoveEntity(htnLogo);
 }
 
 void GameBoard::clearGUIEntities()
