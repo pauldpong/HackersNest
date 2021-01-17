@@ -6,6 +6,10 @@
 #include <string>
 #include <math.h>
 
+#include <chrono>
+#include <thread>
+#include <Game/GameComponents/CloneMovementComponent.h>
+
 using namespace Game;
 
 GameBoard::GameBoard() : player1(nullptr), player2(nullptr), player1HealthGUI(nullptr), player2HealthGUI(nullptr),
@@ -120,6 +124,25 @@ void GameBoard::buildGame()
     player2->setControls(player2Controls);
     player2->setActionButton(sf::Keyboard::Enter);
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player2);
+
+
+    // CLONE TEST
+    GameEngine::Entity* clone = new GameEngine::Entity();
+    clone->AddComponent<GameEngine::RenderComponent>();
+    clone->SetPos(sf::Vector2f(0.f, 0.f));
+    clone->SetSize(sf::Vector2f(50.f, 50.f));
+    Game::CloneMovementComponent* cloneMovementComponent = clone->AddComponent<Game::CloneMovementComponent>();
+
+    float screenHeight = 720.f;
+
+    std::vector<std::pair<sf::Vector2f, float>> replay =
+    {
+        std::make_pair<sf::Vector2f, float>(sf::Vector2f(0.0f, 0.0f), 0),
+        std::make_pair<sf::Vector2f, float>(sf::Vector2f(60.f, screenHeight / 2.f), 0)
+    };
+
+    cloneMovementComponent->setReplay(replay);
+    GameEngine::GameEngineMain::GetInstance()->AddEntity(clone);
 }
 
 void GameBoard::updateGUI()
