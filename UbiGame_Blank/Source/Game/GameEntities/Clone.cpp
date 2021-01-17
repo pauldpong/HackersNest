@@ -3,7 +3,7 @@
 
 using namespace Game;
 
-Game::Clone::Clone(Game::Player* player, std::vector<std::pair<sf::Vector2f, float>> replay) : parent(player)
+Game::Clone::Clone(Game::Player* player, std::vector<std::pair<sf::Vector2f, float>>& replay) : parent(player), replay(replay)
 {
 	setEntityType(GameEngine::EntityType::CLONE);
 	SetSize(sf::Vector2f(50.0f, 50.0f));
@@ -11,7 +11,8 @@ Game::Clone::Clone(Game::Player* player, std::vector<std::pair<sf::Vector2f, flo
 	renderComponent->SetTexture(GameEngine::eTexture::Player1);
 	renderComponent->SetFillColor(sf::Color::Transparent);
 
-	cloneMovementComponent = AddComponent<Game::CloneMovementComponent>();
-	cloneMovementComponent->setReplay(replay);
-	cloneMovementComponent->setSamplingTime(player->getSamplingTime());
+	eventPlaybackComponent = AddComponent<Game::EventPlaybackComponent>();
+	eventPlaybackComponent->setReplay(replay);
+	eventPlaybackComponent->setShotReplay(player->getShotReplay());
+	eventPlaybackComponent->setSamplingTime(player->getSamplingTime());
 }

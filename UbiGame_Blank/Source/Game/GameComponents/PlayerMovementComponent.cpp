@@ -19,11 +19,6 @@ void PlayerMovementComponent::disableInput(bool disable)
     inputDisabled = disable;
 }
 
-void Game::PlayerMovementComponent::resetReplayVector()
-{
-    replay.clear();
-}
-
 void PlayerMovementComponent::Update()
 {
     Component::Update();
@@ -68,16 +63,6 @@ void PlayerMovementComponent::Update()
     }
 
     GetEntity()->SetRotation(GetEntity()->GetRot() + rotation);
-
-    if (time >= samplingTime)
-    {
-        replay.push_back(std::make_pair<sf::Vector2f, float>(GetEntity()->GetPos(), GetEntity()->GetRot()));
-        time = 0.f;
-    }
-    else
-    {
-        time += dt;
-    }
 }
 
 void PlayerMovementComponent::OnAddToWorld()

@@ -6,7 +6,6 @@
 #include <string>
 #include <math.h>
 #include <iostream>
-#include <Game/GameComponents/CloneMovementComponent.h>
 
 using namespace Game;
 
@@ -100,19 +99,19 @@ void Game::GameBoard::buildRound(int currentRound)
     case 1:
         break;
     case 2:
-        clone1_1 = new Game::Clone(player1, player1->getReplayVector());
+        clone1_1 = new Game::Clone(player1, player1->getReplay());
         clone1_1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_1);
         
-        clone2_1 = new Game::Clone(player2, player2->getReplayVector());
+        clone2_1 = new Game::Clone(player2, player2->getReplay());
         clone2_1->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_1);
 
-        replay1 = player1->getReplayVector();
-        replay2 = player2->getReplayVector();
+        replay1 = player1->getReplay();
+        replay2 = player2->getReplay();
 
-        player1->resetReplay();
-        player2->resetReplay();
+        player1->restartRecording();
+        player2->restartRecording();
 
         break;
     case 3:
@@ -127,13 +126,13 @@ void Game::GameBoard::buildRound(int currentRound)
         clone2_1->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_1);
 
-        clone1_2 = new Game::Clone(player1, player1->getReplayVector());
+        clone1_2 = new Game::Clone(player1, player1->getReplay());
         clone1_2->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
         GameEngine::GameEngineMain::GetInstance()->AddEntity(clone1_2);
         
-        clone2_2 = new Game::Clone(player2, player2->getReplayVector());
+        clone2_2 = new Game::Clone(player2, player2->getReplay());
         clone2_2->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
-        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_2);
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(clone2_2);      
 
         break;
     default:

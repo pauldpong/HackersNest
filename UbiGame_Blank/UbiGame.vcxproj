@@ -163,8 +163,9 @@ XCOPY "$(SolutionDir)..\SFML-2.5.0\bin" "$(TargetDir)" /S /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Game\GameComponents\EventRecordingComponent.cpp" />
     <ClCompile Include="Source\Game\GameEntities\Clone.cpp" />
-    <ClCompile Include="Source\Game\GameComponents\CloneMovementComponent.cpp" />
+    <ClCompile Include="Source\Game\GameComponents\EventPlaybackComponent.cpp" />
     <ClCompile Include="Source\Game\GameComponents\ProjectilePhysicsComponent.cpp" />
     <ClCompile Include="Source\Game\GameComponents\PlayerActionComponent.cpp" />
     <ClCompile Include="Source\Game\GameComponents\PlayerMovementComponent.cpp" />
@@ -193,8 +194,9 @@ XCOPY "$(SolutionDir)..\SFML-2.5.0\bin" "$(TargetDir)" /S /Y /I</Command>
     <ClCompile Include="Source\GameEngine\EntitySystem\Components\SpriteRenderComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Game\GameComponents\EventRecordingComponent.h" />
     <ClInclude Include="Source\Game\GameEntities\Clone.h" />
-    <ClInclude Include="Source\Game\GameComponents\CloneMovementComponent.h" />
+    <ClInclude Include="Source\Game\GameComponents\EventPlaybackComponent.h" />
     <ClInclude Include="Source\Game\GameComponents\ProjectilePhysicsComponent.h" />
     <ClInclude Include="Source\Game\GameComponents\PlayerActionComponent.h" />
     <ClInclude Include="Source\Game\GameComponents\PlayerMovementComponent.h" />

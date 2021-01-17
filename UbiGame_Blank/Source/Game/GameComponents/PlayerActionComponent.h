@@ -16,6 +16,8 @@ namespace Game
 
 		void setPlayerAction(int playerAction);
 		void disableInput(bool disable);
+
+		bool getFirePressed() const { return firePressed; }
 	private:
 		int playerActionKey;
 		bool firePressed;

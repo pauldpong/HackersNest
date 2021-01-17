@@ -70,6 +70,4 @@ void PlayerActionComponent::spawnBullet()
 		bullet->setDirectionVector(playerFacingUnitVector);
 		GameEngine::GameEngineMain::GetInstance()->AddEntity(bullet);
 	}
-	
-	
 }

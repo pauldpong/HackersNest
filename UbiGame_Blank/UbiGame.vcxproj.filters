@@ -96,10 +96,13 @@
     <ClCompile Include="Source\Game\GameComponents\ProjectilePhysicsComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\GameComponents\CloneMovementComponent.cpp">
+    <ClCompile Include="Source\Game\GameEntities\Clone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\GameEntities\Clone.cpp">
+    <ClCompile Include="Source\Game\GameComponents\EventRecordingComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\GameComponents\EventPlaybackComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,10 +182,13 @@
     <ClInclude Include="Source\Game\GameComponents\ProjectilePhysicsComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\GameComponents\CloneMovementComponent.h">
+    <ClInclude Include="Source\Game\GameEntities\Clone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\GameEntities\Clone.h">
+    <ClInclude Include="Source\Game\GameComponents\EventRecordingComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameComponents\EventPlaybackComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
