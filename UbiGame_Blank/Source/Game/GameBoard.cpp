@@ -5,9 +5,7 @@
 
 #include <string>
 #include <math.h>
-
-#include <chrono>
-#include <thread>
+#include <iostream>
 #include <Game/GameComponents/CloneMovementComponent.h>
 
 using namespace Game;
@@ -100,6 +98,19 @@ void Game::GameBoard::resetPlayers()
     float screenHeight = 720.f;
     float screenWidth = 1280.f;
 
+    replay = player1->getReplayVector();
+    GameEngine::Entity* clone = new GameEngine::Entity();
+    clone->AddComponent<GameEngine::RenderComponent>();
+    clone->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
+    clone->SetSize(sf::Vector2f(50.f, 50.f));
+    Game::CloneMovementComponent* cloneMovementComponent = clone->AddComponent<Game::CloneMovementComponent>();
+    cloneMovementComponent->setSamplingTime(player1->getSamplingTime());
+    std::cout << player1->getSamplingTime() << std::endl;
+    std::cout << replay.size() << std::endl;
+
+    cloneMovementComponent->setReplay(replay);
+    GameEngine::GameEngineMain::GetInstance()->AddEntity(clone);
+
     player1->SetPos(sf::Vector2f(50.f, screenHeight / 2.f));
     player2->SetPos(sf::Vector2f(screenWidth - 50.f, screenHeight / 2.f));
 
@@ -126,25 +137,6 @@ void GameBoard::buildGame()
     player2->setControls(player2Controls);
     player2->setActionButton(sf::Keyboard::Enter);
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player2);
-
-
-    // CLONE TEST
-    GameEngine::Entity* clone = new GameEngine::Entity();
-    clone->AddComponent<GameEngine::RenderComponent>();
-    clone->SetPos(sf::Vector2f(0.f, 0.f));
-    clone->SetSize(sf::Vector2f(50.f, 50.f));
-    Game::CloneMovementComponent* cloneMovementComponent = clone->AddComponent<Game::CloneMovementComponent>();
-
-    float screenHeight = 720.f;
-
-    std::vector<std::pair<sf::Vector2f, float>> replay =
-    {
-        std::make_pair<sf::Vector2f, float>(sf::Vector2f(0.0f, 0.0f), 0),
-        std::make_pair<sf::Vector2f, float>(sf::Vector2f(60.f, screenHeight / 2.f), 0)
-    };
-
-    cloneMovementComponent->setReplay(replay);
-    GameEngine::GameEngineMain::GetInstance()->AddEntity(clone);
 }
 
 void GameBoard::updateGUI()

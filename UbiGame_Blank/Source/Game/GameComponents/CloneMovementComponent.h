@@ -12,11 +12,13 @@ namespace Game
 		virtual void Update();
 		virtual void OnAddToWorld();
 
+		void setSamplingTime(float time) { samplingTime = time; }
 		void setReplay(std::vector<std::pair<sf::Vector2f, float>> replay);
 
 	private:
 		std::vector<std::pair<sf::Vector2f, float>> replay;
 
+		float samplingTime;
 		int currentReplayIndex = 0;
 		float time = 0.f;
 	};

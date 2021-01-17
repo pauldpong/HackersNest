@@ -44,8 +44,10 @@ namespace Game
         Game::Text* titleText, * startText, * htnText;
         GameEngine::Entity* htnLogo;
 
-	      Game::Player *player1;
+	    Game::Player *player1;
         Game::Player *player2;
+
+        std::vector<std::pair<sf::Vector2f, float>> replay;
 
         bool gameStarted = false;
         bool roundEnded = false;

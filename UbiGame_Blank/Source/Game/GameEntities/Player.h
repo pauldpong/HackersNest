@@ -26,6 +26,9 @@ namespace Game
 		void addBullet(Game::Bullet* bullet);
 		void clearBullets();
 
+		std::vector<std::pair<sf::Vector2f, float>> getReplayVector() const { return movementComponent->getReplayVector(); }
+		float getSamplingTime() const { return movementComponent->getSamplingTime(); }
+
 	private:
 		int playerHealth;
 
@@ -34,6 +37,6 @@ namespace Game
 		// Components 
 		Game::PlayerMovementComponent* movementComponent;
 		Game::PlayerActionComponent* actionComponent;
-    GameEngine::SpriteRenderComponent* renderComponent;
+		GameEngine::SpriteRenderComponent* renderComponent;
 	};
 }

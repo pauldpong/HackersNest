@@ -1,7 +1,5 @@
 #include "CloneMovementComponent.h"
 #include <GameEngine/GameEngineMain.h>
-#include <iostream>
-#include <cassert>
 
 using namespace Game;
 
@@ -21,32 +19,35 @@ void CloneMovementComponent::Update()
 
     const float dt = GameEngine::GameEngineMain::GetTimeDelta();
 
-    sf::Vector2f displacement{ 0.0f, 0.0f };
-    const float speedAmount = 250.0f;
-
     GameEngine::Entity* entity = GetEntity();
+
+    // MOVEMENT
     sf::Vector2f currentPosition = entity->GetPos();
 
     for (auto it = replay.begin(); it != replay.end(); it++) 
     {
-        if (currentPosition == it->first)
+        if (currentPosition == it->first && time >= samplingTime)
         {
+            time = 0;
             currentReplayIndex++;
             break;
         }
     }
 
+    if (currentReplayIndex >= replay.size()) return;
+
     sf::Vector2f start = currentPosition;
     sf::Vector2f end = replay[currentReplayIndex].first;
     time += dt;
-    float x = lerp(start.x, end.x - start.x, time);
-    float y = lerp(start.y, end.y - start.y, time);
-    
-
-    std::cout << x << " " << y << " " << time << std::endl;
-    GetEntity()->SetPos(sf::Vector2f(x, y));
+    float x = lerp(start.x, end.x, time / samplingTime);
+    float y = lerp(start.y, end.y, time / samplingTime);
    
-    //GetEntity()->SetRotation(GetEntity()->GetRot() + rotation);
+    GetEntity()->SetPos(sf::Vector2f(x, y));
+
+    // ROTATION
+    float currentRotation = entity->GetRot();
+    float rotation = lerp(currentRotation, replay[currentReplayIndex].second, time);
+    GetEntity()->SetRotation(rotation);
 }
 
 void CloneMovementComponent::OnAddToWorld()

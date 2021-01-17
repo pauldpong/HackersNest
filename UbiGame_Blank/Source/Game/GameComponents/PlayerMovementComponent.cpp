@@ -14,7 +14,7 @@ void PlayerMovementComponent::setPlayerControls(int playerControls[6])
     controls[5] = playerControls[5];
 }
 
-void Game::PlayerMovementComponent::disableInput(bool disable)
+void PlayerMovementComponent::disableInput(bool disable)
 {
     inputDisabled = disable;
 }
@@ -63,6 +63,16 @@ void PlayerMovementComponent::Update()
     }
 
     GetEntity()->SetRotation(GetEntity()->GetRot() + rotation);
+
+    if (time >= samplingTime)
+    {
+        replay.push_back(std::make_pair<sf::Vector2f, float>(GetEntity()->GetPos(), GetEntity()->GetRot()));
+        time = 0.f;
+    }
+    else
+    {
+        time += dt;
+    }
 }
 
 void PlayerMovementComponent::OnAddToWorld()

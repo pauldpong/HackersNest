@@ -17,6 +17,7 @@ Game::Player::Player() : playerHealth(100)
 	AddComponent<GameEngine::CollidablePhysicsComponent>();
 	actionComponent = AddComponent<Game::PlayerActionComponent>();
 	movementComponent = AddComponent<Game::PlayerMovementComponent>();
+	movementComponent->setSamplingTime(1 / 60.f);
 }
 
 void Game::Player::setControls(int controls[4]) 
