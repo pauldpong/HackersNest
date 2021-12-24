@@ -165,7 +165,6 @@ void Game::GameBoard::resetPlayers()
 
 void GameBoard::buildGame()
 {
-    drawBackground();
     //Boundary Walls
     Wall* wallTop = new Wall(sf::Vector2f(1280.0f, 40.0f), sf::Vector2f(640.0f, 20.0f));
     GameEngine::GameEngineMain::GetInstance()->AddEntity(wallTop);
@@ -182,7 +181,7 @@ void GameBoard::buildGame()
 
     player1 = new Game::Player(GameEngine::eTexture::Player1);
     player1->setControls(player1Controls);
-    player1->setActionButton(sf::Keyboard::Space);
+    player1->setActionButton(sf::Keyboard::V);
     GameEngine::GameEngineMain::GetInstance()->AddEntity(player1);
 
     player2 = new Game::Player(GameEngine::eTexture::Player2);
@@ -212,6 +211,7 @@ void GameBoard::updateGUI()
 
 void GameBoard::buildMenuGUI()
 {
+    drawBackground();
   const std::string gameName = "BulletTime";
   const std::string startGameText = "Press Space to start!";
   float windowWidth = 1280.f;

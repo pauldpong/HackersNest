@@ -28,7 +28,7 @@ void PlayerMovementComponent::Update()
     const float dt = GameEngine::GameEngineMain::GetTimeDelta();
 
     sf::Vector2f displacement{0.0f, 0.0f};
-    const float speedAmount = 250.0f;
+    const float speedAmount = 300.0f;
 
     if(sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(controls[0])))
     {
@@ -52,7 +52,7 @@ void PlayerMovementComponent::Update()
 
 
     float rotation = 0;
-    const float turnSpeed = 65.f;
+    const float turnSpeed = 180.f;
     if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(controls[4])))
     {
         rotation += -turnSpeed * dt;
